@@ -1,0 +1,19 @@
+chmod 400 key.pem
+ssh -i key.pem ubuntu@IP
+
+sudo apt update
+sudo apt upgrade -y
+sudo apt install nginx -y
+sudo systemctl start nginx
+sudo systemctl enable nginx
+
+sudo apt install git -y
+sudo rm -rf /var/www/html/*
+cd /var/www/html
+sudo git clone https://github.com/username/repo.git
+sudo mv repo/* .
+sudo rm -rf repo
+
+sudo chown -R www-data:www-data /var/www/html
+sudo chmod -R 755 /var/www/html
+sudo systemctl restart nginx
